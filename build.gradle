@@ -1,0 +1,42 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.5.3'
+	id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter'
+
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa' // JPA
+	runtimeOnly 'com.mysql:mysql-connector-j' // ← これを追加
+
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	compileOnly 'org.projectlombok:lombok:1.18.28'
+	annotationProcessor 'org.projectlombok:lombok:1.18.28'
+	implementation 'org.hibernate.validator:hibernate-validator:8.0.1.Final'
+	implementation 'jakarta.validation:jakarta.validation-api:3.0.2'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'com.github.dozermapper:dozer-core:6.4.0'
+	implementation 'com.github.dozermapper:dozer-core:6.5.0' // バージョンは必要に応じて調整
+	implementation 'javax.xml.bind:jaxb-api:2.3.1'
+	implementation 'org.glassfish.jaxb:jaxb-runtime:2.3.1'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}

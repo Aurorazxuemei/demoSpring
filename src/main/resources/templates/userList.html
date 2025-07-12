@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.thymeleaf.org ">
+<head>
+    <meta charset="UTF-8"> <!-- ★ これが重要！ -->
+    <title>ホームページ</title>
+</head>
+<body>
+<h2> ユーザー一覧画面</h2>
+<div>
+    <span>絞り込み検索条件</span>
+</div>
+<div>
+    <form th:action="@{/userList}" method="post" th:object="${userListForm}">
+        <table>
+            <tr>
+                <td><span>ログインID</span>
+                </td>
+                <td>
+                    <div>
+                        <div>
+                            <input type="text" th:field="*{loginId}">
+                        </div>
+                        <div>
+                            <span>*部分一致 </span>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td><span>アカウント状態：</span></td>
+                <td>
+                    <select class="form-select" name="userStatusKind">
+                        <option value="">指定なし</option>
+                        <option th:each="userStatusKind : ${userStatusKinds}"
+                                th:value="${userStatusKind}" th:text="${userStatusKind.displayValue}"></option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><span>所有権限：</span></td>
+                <td>
+                    <select class="form-select" name="authorityKind">
+                        <option value="">指定なし</option>
+                        <option th:each="authorityKind : ${authorityKinds}"
+                                th:value="${authorityKind}" th:text="${authorityKind.displayValue}"></option>
+                    </select>
+                </td>
+            </tr>
+
+        </table>
+        <input type="submit" name="search" value="検索">
+
+    </form>
+</div>
+
+</body>
+</html>
