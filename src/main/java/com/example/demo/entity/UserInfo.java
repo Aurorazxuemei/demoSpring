@@ -2,10 +2,9 @@ package com.example.demo.entity;
 
 import com.example.demo.constant.AuthorityKind;
 import com.example.demo.constant.UserStatusKind;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.example.demo.entity.converter.UserAuthorityConverter;
+import com.example.demo.entity.converter.UserStatusConverter;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -33,9 +32,12 @@ import java.time.LocalDateTime;
         private LocalDateTime accountLockedTime;
 
         @Column(name = "is_disabled")
-        private UserStatusKind status;
+        @Convert(converter = UserStatusConverter.class)
+        private UserStatusKind userStatusKind;
 
-        private AuthorityKind authority;
+        @Column(name = "authority")
+        @Convert(converter = UserAuthorityConverter.class)
+        private AuthorityKind authorityKind;
 
         @Column(name = "create_time")
         private LocalDateTime createTime;

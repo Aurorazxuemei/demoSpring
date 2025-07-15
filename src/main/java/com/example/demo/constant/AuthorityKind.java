@@ -21,4 +21,13 @@ public enum AuthorityKind {
         this.code = code;
         this.displayValue = displayValue;
     }
+
+    public static AuthorityKind from(String code) {
+        for (AuthorityKind item : AuthorityKind.values()) {
+            if (code.equals(item.code)) {
+                return item;
+            }
+        }
+        return AuthorityKind.UNKNOWN;
+    }
 }

@@ -23,3 +23,4 @@ public class UserListForm {
     /** ユーザー権限種別 */
     private AuthorityKind authorityKind;
 }
+
