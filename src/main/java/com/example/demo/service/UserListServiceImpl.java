@@ -1,6 +1,8 @@
 package com.example.demo.service;
 
+import com.example.demo.constant.UserDeleteResult;
 import com.example.demo.dto.UserListInfo;
+import com.example.demo.dto.UserSerchInfo;
 import com.example.demo.entity.UserInfo;
 import com.example.demo.form.UserListForm;
 import com.example.demo.repository.UserInfoRepository;
@@ -43,8 +45,8 @@ public class UserListServiceImpl implements UserListService {
     }
 
     @Override
-    public List<UserListInfo> editUserListByParam(UserListForm form) {
-        var userInfo = mapper.map(form, UserInfo.class);
+    public List<UserListInfo> editUserListByParam(UserSerchInfo dto) {
+        var userInfo = mapper.map(dto, UserInfo.class);
         return toUserListInfos(findUserInfoByParam(userInfo));
     }
 
@@ -59,5 +61,14 @@ public class UserListServiceImpl implements UserListService {
         } else {
             return repository.findByLoginIdLike(loginIdParam);
         }
+    }
+    @Override
+    public UserDeleteResult deleteUserInfoById(String loginId){
+       var userInfo = repository.findById(loginId);
+       if (userInfo.isEmpty()){
+           return UserDeleteResult.ERROR;
+       }
+       repository.deleteById(loginId);
+       return UserDeleteResult.SUCCEED;
     }
 }

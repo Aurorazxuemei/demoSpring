@@ -1,6 +1,8 @@
 package com.example.demo.service;
 
+import com.example.demo.constant.UserDeleteResult;
 import com.example.demo.dto.UserListInfo;
+import com.example.demo.dto.UserSerchInfo;
 import com.example.demo.form.UserListForm;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,5 +22,11 @@ public interface UserListService {
      *
      * @return ユーザー情報テーブルの該当登録情報
      */
-    public List<UserListInfo> editUserListByParam(UserListForm form);
+    public List<UserListInfo> editUserListByParam(UserSerchInfo dto);
+
+    /**
+     * 選択されたユーザー情報を削除する
+     * @return 実行結果（エラー有無）
+     */
+    public UserDeleteResult deleteUserInfoById(String loginId);
 }
