@@ -35,6 +35,8 @@ dependencies {
 	implementation 'com.github.dozermapper:dozer-core:6.5.0' // バージョンは必要に応じて調整
 	implementation 'javax.xml.bind:jaxb-api:2.3.1'
 	implementation 'org.glassfish.jaxb:jaxb-runtime:2.3.1'
+	implementation 'org.webjars:bootstrap:5.2.3'
+	implementation 'org.webjars:jquery:3.6.4'
 }
 
 tasks.named('test') {

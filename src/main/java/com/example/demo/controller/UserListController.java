@@ -22,7 +22,7 @@ public class UserListController {
     @GetMapping("/userList")
     public String View(Model model, UserListForm userListForm) {
          var userInfos = service.editUserList();
-//        model.addAttribute("userListForm", userListForm); // ★これが必要！
+        model.addAttribute("userListForm", userListForm); // ★これが必要！
         model.addAttribute("userList", userInfos);
         model.addAttribute("userStatusKinds", UserStatusKind.values());
         model.addAttribute("authorityKinds", AuthorityKind.values());

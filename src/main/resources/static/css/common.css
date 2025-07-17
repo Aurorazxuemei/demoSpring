@@ -1,0 +1,5 @@
+@charset "UTF-8";
+/* 選択された行のスタイル*/
+.table-active{
+    background-color: deepskyblue; /*背景色*/
+}
