@@ -58,7 +58,8 @@ public class UserListController {
      */
     @PostMapping( value = "/userList",params = "delete")
     public String deleteUer(UserListForm form,  RedirectAttributes redirectAttributes){
-        var executeResult = service.deleteUserInfoById(form.getSelectedLoginId());
+        var deletedLoginedId = form.getSelectedLoginId();
+        var executeResult = service.deleteUserInfoById(deletedLoginedId);
         redirectAttributes.addFlashAttribute(ModelKey.IS_ERROR, executeResult == UserDeleteResult.ERROR);
         redirectAttributes.addFlashAttribute(ModelKey.MESSAGE, AppUtil.getMessage(messageSource,executeResult.getMessageId()));
         //削除後、Formの選択されたログインID不要の為に、クリアします。
