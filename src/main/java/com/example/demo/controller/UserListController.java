@@ -7,6 +7,7 @@ import com.example.demo.form.UserListForm;
 import com.example.demo.service.UserListService;
 import com.example.demo.util.AppUtil;
 import com.github.dozermapper.core.Mapper;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.MessageSource;
 import org.springframework.http.ResponseEntity;
@@ -24,10 +25,12 @@ public class UserListController {
     private final UserListService service;
     private final Mapper mapper;
     private final MessageSource messageSource;
+    private final HttpSession session;
 
     @GetMapping("/userList")
     public String View(Model model, UserListForm userListForm) {
-         var userInfos = service.editUserList();
+        session.removeAttribute(SessionKeyConst.SELECETED_LOGIN_ID);
+        var userInfos = service.editUserList();
         model.addAttribute("userListForm", userListForm); // ★これが必要！
         model.addAttribute("userList", userInfos);
         model.addAttribute("userStatusKinds", UserStatusKind.values());
@@ -50,6 +53,18 @@ public class UserListController {
         model.addAttribute("authorityKinds", AuthorityKind.values());
         return "userList";
     }
+
+    /**
+     * 編集機能の実装
+     */
+    @PostMapping(value = "/userList",params = "edit")
+    public String updateUser(UserListForm form){
+        session.setAttribute(SessionKeyConst.SELECETED_LOGIN_ID,form.clearSelectedLoginId());
+        return "redirect:/userEdit";
+    }
+
+
+
     /**
      * 選択された行を削除する。
      *
