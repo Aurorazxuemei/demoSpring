@@ -59,7 +59,7 @@ public class UserListController {
      */
     @PostMapping(value = "/userList",params = "edit")
     public String updateUser(UserListForm form){
-        session.setAttribute(SessionKeyConst.SELECETED_LOGIN_ID,form.clearSelectedLoginId());
+        session.setAttribute(SessionKeyConst.SELECETED_LOGIN_ID,form.getSelectedLoginId());
         return "redirect:/userEdit";
     }
 

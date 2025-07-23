@@ -8,6 +8,7 @@ import com.example.demo.dto.UserEditInfo;
 import com.example.demo.dto.UserUpdateInfo;
 import com.example.demo.entity.UserInfo;
 import com.example.demo.form.UserEditForm;
+import com.example.demo.form.UserListForm;
 import com.example.demo.service.UserEditService;
 import com.example.demo.util.AppUtil;
 import com.github.dozermapper.core.Mapper;
@@ -31,6 +32,8 @@ public class UserEditController {
     @GetMapping("/userEdit")
     public String view(Model model, UserEditForm form) throws Exception {
         var loginId = (String) session.getAttribute(SessionKeyConst.SELECETED_LOGIN_ID);
+//        var userListForm = (UserListForm) session.getAttribute(SessionKeyConst.SELECETED_LOGIN_ID);
+//        var loginId = userListForm.getLoginId();
         var userInfoOpt = service.searchUserInfo(loginId);
         if (userInfoOpt.isEmpty()) {
             throw new Exception("ログインIDに該当するユーザー情報が見つかりません。");

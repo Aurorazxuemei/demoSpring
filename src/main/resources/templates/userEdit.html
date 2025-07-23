@@ -20,11 +20,11 @@
         <div class="mt-1">
             <table>
                 <tr>
-                    <td><label for="userEditInfo_loginId">ログインID：</label></td>
+                    <td><label>ログインID：</label></td>
                     <td>
                         <div class="row g-3 align-items-center">
                             <div class="col-auto">
-                                <input type="text" class="form-control" th:field="*{userEditInfo.loginId}">
+                                <input type="text" class="form-control" th:field="${userEditInfo.loginId}">
                             </div>
 
                         </div>
@@ -32,7 +32,7 @@
                 </tr>
 
                 <tr>
-                    <td><label for="loginId">ログイン失敗回数：</label></td>
+                    <td><label>ログイン失敗回数：</label></td>
                     <td>
                         <div class="row g-3 align-items-center">
                             <div class="col-auto">
@@ -43,7 +43,7 @@
                 </tr>
 
                 <tr>
-                    <td><label for="loginId">アカウントロック日時：</label></td>
+                    <td><label>アカウントロック日時：</label></td>
                     <td>
                         <div class="row g-3 align-items-center">
                             <div class="col-auto">
@@ -54,7 +54,17 @@
                 </tr>
 
                 <tr>
-                    <td><label for="userStatusKind">アカウント状態：</label></td>
+                    <td></td>
+                    <td>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" th:field="*{resetsLoginFailure}" id="resetsLoginFailure">
+                            <label class="form-check-label" for="resetsLoginFailure">ログイン失敗回数、アカウントロック日時をクリアする</label>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td><label th:for="*{userStatusKind}">アカウント状態：</label></td>
                     <td>
                         <select class="form-select" th:field="*{userStatusKind}">
                             <option th:each="userStatusKindOption : ${userStatusKindOptions}"
@@ -63,7 +73,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td><label for="authorityKind">所有権限：</label></td>
+                    <td><label th:for="*{authorityKind}">所有権限：</label></td>
                     <td>
                         <select class="form-select" th:field="*{authorityKind}">
                             <option th:each="authorityKindOption : ${authorityKindOptions}"
@@ -72,8 +82,8 @@
                     </td>
                 </tr>
             </table>
-            <div class="mt-3">
-            <input type="submit" class="btn btn-primary mt-3" name="update" value="更新">
+            <div class="mt-3 d-flex gap-3">
+            <input type="submit" class="btn btn-primary" name="update" value="更新">
             <a class="btn btn-secondary" th:href="@{/userList}">戻る</a>
             </div>
         </div>
