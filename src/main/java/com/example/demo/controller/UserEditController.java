@@ -33,7 +33,8 @@ public class UserEditController {
 //        var loginId = userListForm.getLoginId();
         var userInfoOpt = service.searchUserInfo(loginId);
         if (userInfoOpt.isEmpty()) {
-            throw new Exception("ログインIDに該当するユーザー情報が見つかりません。");
+            model.addAttribute("message",AppUtil.getMessage(messageSource,MessageConst.USEREDIT_NON_EXISTED_LOGIN_ID));
+            return ViewNameConst.USER_EDIT_ERROR;
         }
         setupCommonInfo(model,userInfoOpt.get());
         return ViewNameConst.USER_EDIT;
@@ -51,9 +52,13 @@ public class UserEditController {
     var updateDto = mapper.map(form, UserUpdateInfo.class);
     updateDto.setLoginId((String)session.getAttribute(SessionKeyConst.SELECETED_LOGIN_ID));
     UserEditResult updateResult = service.updateUserInfo(updateDto);
-    setupCommonInfo(model,updateResult.getUpdateUserInfo());
     var updateMessage = updateResult.getUpdateMessage();
-    model.addAttribute("isError",updateMessage == UserEditMessage.FAILED);
+    if(updateMessage == UserEditMessage.FAILED){
+        model.addAttribute("message",AppUtil.getMessage(messageSource,updateMessage.getMessageId()));
+        return ViewNameConst.USER_EDIT_ERROR;
+    }
+    setupCommonInfo(model,updateResult.getUpdateUserInfo());
+    model.addAttribute("isError",false);
     model.addAttribute("message", AppUtil.getMessage(messageSource,updateMessage.getMessageId()));
     return ViewNameConst.USER_EDIT;
     }

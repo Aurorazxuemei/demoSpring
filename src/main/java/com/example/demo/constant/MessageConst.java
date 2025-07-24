@@ -9,4 +9,6 @@ public class MessageConst {
     public static final String USEREDIT_UPDATE_FAILED = "userEdit.updateFailed";
     /**ユーザー情報編集画面：ユーザー更新完了*/
     public static final String USEREDIT_UPDATE_SUCCEED = "userEdit.updateSucceed";
+    /** ユーザー情報編集画面：存在しないログインID */
+    public static final String USEREDIT_NON_EXISTED_LOGIN_ID = "userEdit.nonExistedLoginId";
 }
