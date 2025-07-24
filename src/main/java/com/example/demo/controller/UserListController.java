@@ -27,7 +27,7 @@ public class UserListController {
     private final MessageSource messageSource;
     private final HttpSession session;
 
-    @GetMapping("/userList")
+    @GetMapping(UrlConst.USER_LIST)
     public String View(Model model, UserListForm userListForm) {
         session.removeAttribute(SessionKeyConst.SELECETED_LOGIN_ID);
         var userInfos = service.editUserList();
@@ -35,7 +35,7 @@ public class UserListController {
         model.addAttribute("userList", userInfos);
         model.addAttribute("userStatusKinds", UserStatusKind.values());
         model.addAttribute("authorityKinds", AuthorityKind.values());
-        return "userList";
+        return ViewNameConst.USER_LIST;
     }
     /**
      * 検索条件に合致するユーザー情報を画面に表示します。
@@ -43,7 +43,7 @@ public class UserListController {
      * @param model モデル
      * @return 表示画面
      */
-    @PostMapping( value = "/userList",params = "search")
+    @PostMapping( value = UrlConst.USER_LIST,params = "search")
     public String searchUser(Model model,UserListForm form){
         var searchDto = mapper.map(form, UserSerchInfo.class);
         var userInfos = service.editUserListByParam(searchDto);
@@ -51,16 +51,17 @@ public class UserListController {
         model.addAttribute("userList", userInfos);
         model.addAttribute("userStatusKinds", UserStatusKind.values());
         model.addAttribute("authorityKinds", AuthorityKind.values());
-        return "userList";
+        return ViewNameConst.USER_LIST;
     }
 
     /**
      * 編集機能の実装
      */
-    @PostMapping(value = "/userList",params = "edit")
+    @PostMapping(value = UrlConst.USER_LIST,params = "edit")
     public String updateUser(UserListForm form){
         session.setAttribute(SessionKeyConst.SELECETED_LOGIN_ID,form.getSelectedLoginId());
-        return "redirect:/userEdit";
+       // return "redirect:/userEdit";
+        return AppUtil.doRedirect(UrlConst.USER_EDIT);
     }
 
 
@@ -71,7 +72,7 @@ public class UserListController {
      * @param redirectAttributes リダイレクト用オブジェクト
      * @return 表示画面
      */
-    @PostMapping( value = "/userList",params = "delete")
+    @PostMapping( value = UrlConst.USER_LIST,params = "delete")
     public String deleteUer(UserListForm form,  RedirectAttributes redirectAttributes){
         var deletedLoginedId = form.getSelectedLoginId();
         var executeResult = service.deleteUserInfoById(deletedLoginedId);
@@ -80,7 +81,7 @@ public class UserListController {
         //削除後、Formの選択されたログインID不要の為に、クリアします。
         redirectAttributes.addFlashAttribute("userListForm",form.clearSelectedLoginId());
         redirectAttributes.addFlashAttribute("operationKind", OperationKind.DELETE);
-        return "redirect:/userList";
+        return AppUtil.doRedirect(UrlConst.USER_LIST);
     }
 }
 

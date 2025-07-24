@@ -1,9 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.constant.AuthorityKind;
-import com.example.demo.constant.SessionKeyConst;
-import com.example.demo.constant.UserEditMessage;
-import com.example.demo.constant.UserStatusKind;
+import com.example.demo.constant.*;
 import com.example.demo.dto.UserEditInfo;
 import com.example.demo.dto.UserUpdateInfo;
 import com.example.demo.entity.UserInfo;
@@ -29,7 +26,7 @@ public class UserEditController {
     private final Mapper mapper;
     private final MessageSource messageSource;
 
-    @GetMapping("/userEdit")
+    @GetMapping(UrlConst.USER_EDIT)
     public String view(Model model, UserEditForm form) throws Exception {
         var loginId = (String) session.getAttribute(SessionKeyConst.SELECETED_LOGIN_ID);
 //        var userListForm = (UserListForm) session.getAttribute(SessionKeyConst.SELECETED_LOGIN_ID);
@@ -39,7 +36,7 @@ public class UserEditController {
             throw new Exception("ログインIDに該当するユーザー情報が見つかりません。");
         }
         setupCommonInfo(model,userInfoOpt.get());
-        return"userEdit";
+        return ViewNameConst.USER_EDIT;
     }
 
     private void setupCommonInfo(Model model, UserInfo userInfo) {
@@ -49,7 +46,7 @@ public class UserEditController {
         model.addAttribute("authorityKindOptions", AuthorityKind.values());
     }
 
-    @PostMapping(value="/userEdit",params = "update")
+    @PostMapping(value=UrlConst.USER_EDIT,params = "update")
     public String updateUser(Model model,UserEditForm form){
     var updateDto = mapper.map(form, UserUpdateInfo.class);
     updateDto.setLoginId((String)session.getAttribute(SessionKeyConst.SELECETED_LOGIN_ID));
@@ -58,7 +55,7 @@ public class UserEditController {
     var updateMessage = updateResult.getUpdateMessage();
     model.addAttribute("isError",updateMessage == UserEditMessage.FAILED);
     model.addAttribute("message", AppUtil.getMessage(messageSource,updateMessage.getMessageId()));
-    return "userEdit";
+    return ViewNameConst.USER_EDIT;
     }
 
 
