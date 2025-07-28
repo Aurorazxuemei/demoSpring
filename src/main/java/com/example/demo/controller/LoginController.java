@@ -1,9 +1,12 @@
 package com.example.demo.controller;
 
+import com.example.demo.constant.MessageConst;
 import com.example.demo.form.LoginForm;
 import com.example.demo.service.LoginService;
+import com.example.demo.util.AppUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -19,6 +22,8 @@ public class LoginController {
 
     private final PasswordEncoder passwordEncoder;
     private final LoginService loginService;
+    private final MessageSource messageSource;
+
 
 //    private static final String LOGIN_ID = "user";
 //    private static final String PASSWORD = "pwd";
@@ -39,7 +44,8 @@ public class LoginController {
         if (isCorrectUserAuth) {
             return "redirect:/menu";
         } else {
-            model.addAttribute("errorMsg", "ログインIDとパスワードの組み合わせが間違っています");
+            String errorMsg = AppUtil.getMessage(messageSource,MessageConst.LOGIN_WRONG_INPUT);
+            model.addAttribute("errorMsg", errorMsg);
             return "login";
         }
     }
