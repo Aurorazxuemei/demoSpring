@@ -2,12 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>ログイン画面</title>
+    <title>ユーザー登録画面</title>
 </head>
 <body>
-<h2>ログイン画面</h2>
+<h2>ユーザー登録画面</h2>
 <span th:text="${errorMsg}"> </span>
-<form th:action="@{/login}" method="post" th:object="${loginForm}">
+<form th:action="@{/signup}" method="post" th:object="${signupForm}">
     <div>
         <lable>ログインID</lable>
         <input type="text" th:field="*{loginId}">
@@ -17,9 +17,8 @@
         <input type="password" th:field="*{password}">
     </div>
     <div>
-        <input type="submit" value="ログイン">
+        <input type="submit" value="ユーザー登録">
     </div>
 </form>
-<a th:href="@{/signup}">ユーザー登録</a>
 </body>
 </html>
