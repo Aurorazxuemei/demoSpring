@@ -19,10 +19,14 @@ public class SignupServiceImpl implements SignupService {
     private final PasswordEncoder passwordEncoder;
 
     @Override
-    public UserInfo registerUserInfo(SignupForm form){
+    public Optional<UserInfo> registerUserInfo(SignupForm form){
+        var userInfoExistedOpt =repository.findById(form.getLoginId());
+        if(userInfoExistedOpt.isPresent()){
+            return Optional.empty();
+        }
         var userInfo = mapper.map(form, UserInfo.class);
         String encodedpassword = passwordEncoder.encode(form.getPassword());
         userInfo.setPassword(encodedpassword);
-        return repository.save(userInfo);
+        return Optional.of(repository.save(userInfo));
     }
 }

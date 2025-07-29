@@ -6,7 +6,7 @@
 </head>
 <body>
 <h2>ユーザー登録画面</h2>
-<span th:text="${errorMsg}"> </span>
+<span th:text="${message}"> </span>
 <form th:action="@{/signup}" method="post" th:object="${signupForm}">
     <div>
         <lable>ログインID</lable>

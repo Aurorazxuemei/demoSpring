@@ -16,6 +16,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.Optional;
+
 
 @Controller
 @RequiredArgsConstructor
@@ -33,7 +35,16 @@ public class SignupController {
     @PostMapping("/signup")
     public void login(Model model, SignupForm signupForm) {
         var userInfo = signupService.registerUserInfo(signupForm);
+            String errorMsg = AppUtil.getMessage(messageSource,judgeMessageKey(userInfo));
+            model.addAttribute("message", errorMsg);
     }
 
+    private String judgeMessageKey(Optional<UserInfo> userInfo) {
+        if (userInfo.isEmpty()) {
+            return MessageConst.SIGNUP_EXISTED_LOGIN_ID;
+        } else {
+            return MessageConst.SIGNUP_RESIST_SUCCEED;
+        }
+    }
 
 }

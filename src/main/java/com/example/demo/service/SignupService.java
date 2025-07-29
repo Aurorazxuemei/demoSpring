@@ -6,5 +6,5 @@ import com.example.demo.form.SignupForm;
 import java.util.Optional;
 
 public interface SignupService {
-    public UserInfo registerUserInfo(SignupForm form);
+    public Optional<UserInfo> registerUserInfo(SignupForm form);
 }
