@@ -1,24 +1,32 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
+    <script type="text/javascript" th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/5.2.3/css/bootstrap.min.css}">
     <meta charset="UTF-8">
     <title>ユーザー登録画面</title>
 </head>
 <body>
+<div class="container-fluid">
 <h2>ユーザー登録画面</h2>
 <span th:text="${message}"> </span>
 <form th:action="@{/signup}" method="post" th:object="${signupForm}">
-    <div>
-        <lable>ログインID</lable>
-        <input type="text" th:field="*{loginId}">
-    </div>
-    <div>
-        <lable>パスワード</lable>
-        <input type="password" th:field="*{password}">
-    </div>
-    <div>
-        <input type="submit" value="ユーザー登録">
+    <div class="form-group">
+        <div class="col-1">
+            <p>
+                <lable for="loginId">ログインID</lable>
+            </p>
+            <input class="form-control" type="text" th:field="*{loginId}">
+        </div>
+        <div class="col-1">
+            <p>
+                <lable for="password">パスワード</lable>
+            </p>
+            <input class="form-control" type="password" th:field="*{password}">
+        </div>
+        <p><input class="btn btn-primary" type="submit" value="ユーザー登録"></p>
     </div>
 </form>
+</div>
 </body>
 </html>
