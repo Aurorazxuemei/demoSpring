@@ -10,6 +10,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+import static com.example.demo.constant.AuthorityKind.ITEM_WATCHER;
+import static com.example.demo.constant.UserStatusKind.ENABLED;
+
 @Service
 @RequiredArgsConstructor
 public class SignupServiceImpl implements SignupService {
@@ -27,6 +30,9 @@ public class SignupServiceImpl implements SignupService {
         var userInfo = mapper.map(form, UserInfo.class);
         String encodedpassword = passwordEncoder.encode(form.getPassword());
         userInfo.setPassword(encodedpassword);
+        //NullPointerExceptionの対応
+        userInfo.setAuthorityKind(ITEM_WATCHER);
+        userInfo.setUserStatusKind(ENABLED);
         return Optional.of(repository.save(userInfo));
     }
 }
