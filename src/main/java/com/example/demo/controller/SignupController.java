@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.constant.MessageConst;
+import com.example.demo.constant.SinupMessage;
 import com.example.demo.entity.UserInfo;
 import com.example.demo.form.LoginForm;
 import com.example.demo.form.SignupForm;
@@ -35,15 +36,17 @@ public class SignupController {
     @PostMapping("/signup")
     public void login(Model model, SignupForm signupForm) {
         var userInfo = signupService.registerUserInfo(signupForm);
-            String errorMsg = AppUtil.getMessage(messageSource,judgeMessageKey(userInfo));
-            model.addAttribute("message", errorMsg);
+        var signupMessage =judgeMessageKey(userInfo);
+        String message = AppUtil.getMessage(messageSource, signupMessage.getMessageId());
+        model.addAttribute("message", message);
+        model.addAttribute("isError", signupMessage.isError());
     }
 
-    private String judgeMessageKey(Optional<UserInfo> userInfo) {
+    private SinupMessage judgeMessageKey(Optional<UserInfo> userInfo) {
         if (userInfo.isEmpty()) {
-            return MessageConst.SIGNUP_EXISTED_LOGIN_ID;
+            return SinupMessage.EXISTED_LOGIN_ID;
         } else {
-            return MessageConst.SIGNUP_RESIST_SUCCEED;
+            return SinupMessage.SUSSEED;
         }
     }
 

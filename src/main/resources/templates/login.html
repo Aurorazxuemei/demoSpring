@@ -13,13 +13,13 @@
     <span th:text="${errorMsg}"> </span>
     <form th:action="@{/login}" method="post" th:object="${loginForm}">
         <div class="form-group">
-            <div class="col-1">
+            <div class="col-3 col-md-2 col-xxl-1">
                 <p>
                     <lable for="loginId">ログインID</lable>
                 </p>
                 <input class="form-control" type="text" th:field="*{loginId}">
             </div>
-            <div class="col-1">
+            <div class="col-3 col-md-2 col-xxl-1">
                 <p>
                     <lable for="password">パスワード</lable>
                 </p>
