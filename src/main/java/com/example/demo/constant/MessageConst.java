@@ -17,4 +17,6 @@ public class MessageConst {
     public static final String SIGNUP_EXISTED_LOGIN_ID = "signup.existedLoginId";
     /**ユーザー登録画面:ユーザー登録完了*/
     public static final String SIGNUP_RESIST_SUCCEED = "signup.resistSucceed";
+    /**共通：入力内容誤り*/
+    public static final String FORM_ERROR = "common.formError";
 }
