@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class LoginController {
 
 
-    private final PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder=new BCryptPasswordEncoder();
     private final LoginService loginService;
     private final MessageSource messageSource;
 

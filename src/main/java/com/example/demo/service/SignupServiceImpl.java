@@ -5,6 +5,7 @@ import com.example.demo.form.SignupForm;
 import com.example.demo.repository.UserInfoRepository;
 import com.github.dozermapper.core.Mapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +20,7 @@ public class SignupServiceImpl implements SignupService {
 
     public final UserInfoRepository repository;
     private final Mapper mapper;
-    private final PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder=new BCryptPasswordEncoder();
 
     @Override
     public Optional<UserInfo> registerUserInfo(SignupForm form){
