@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.constant.MessageConst;
+import com.example.demo.constant.UrlConst;
 import com.example.demo.form.LoginForm;
 import com.example.demo.service.LoginService;
 import com.example.demo.util.AppUtil;
@@ -28,13 +29,13 @@ public class LoginController {
 //    private static final String LOGIN_ID = "user";
 //    private static final String PASSWORD = "pwd";
 
-    @GetMapping("/login")
+    @GetMapping(UrlConst.LOGIN)
     public String View(Model model, LoginForm loginForm) {
         model.addAttribute("loginForm", loginForm);
         return "login";
     }
 
-    @PostMapping("/login")
+    @PostMapping(UrlConst.LOGIN)
     public String login(Model model, LoginForm loginForm) {
         var userInfo = loginService.searchUserById(loginForm.getLoginId());
 

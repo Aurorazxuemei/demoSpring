@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.constant.MessageConst;
 import com.example.demo.constant.SinupMessage;
+import com.example.demo.constant.UrlConst;
 import com.example.demo.entity.UserInfo;
 import com.example.demo.form.LoginForm;
 import com.example.demo.form.SignupForm;
@@ -29,7 +30,7 @@ public class SignupController {
     private final SignupService signupService;
     private final MessageSource messageSource;
 
-    @GetMapping("/signup")
+    @GetMapping(UrlConst.SIGNUP)
     public String View(Model model, SignupForm signupForm) {
         model.addAttribute("signupForm", signupForm);
         return "signup";
@@ -41,7 +42,7 @@ public class SignupController {
      * @param signupForm　フォームの入力情報
      * @param bindingResult　入力チェック結果
      */
-    @PostMapping("/signup")
+    @PostMapping(UrlConst.SIGNUP)
     public void login(Model model, @Validated SignupForm signupForm, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
 //            String message = AppUtil.getMessage(messageSource,MessageConst.FORM_ERROR);
