@@ -23,14 +23,14 @@
             <p>
                 <label for="loginId">ログインID</label>
             </p>
-            <input class="form-control" type="text"  id="loginId" name="loginId" th:field="*{loginId}">
+            <input class="form-control" type="text"  id="loginId" th:field="*{loginId}">
         </div>
         <span class="text-danger" th:if="${#fields.hasErrors('loginId')}" th:errors="*{loginId}"></span>
         <div class="col-3 col-md-2 col-xxl-1">
             <p>
                 <label for="password">パスワード</label>
             </p>
-            <input class="form-control" type="password"  id="password" name="password" th:field="*{password}">
+            <input class="form-control" type="password"  id="password" th:field="*{password}">
         </div>
         <span class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
         <p><input class="btn btn-primary" type="submit" value="ユーザー登録"></p>

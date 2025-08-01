@@ -16,13 +16,13 @@
                 <p>
                     <label for="loginId">ログインID</label>
                 </p>
-                <input class="form-control" type="text" id="loginId" name="loginId">
+                <input class="form-control" type="text"  id="loginId" th:field="*{loginId}">
             </div>
             <div class="col-3 col-md-2 col-xxl-1">
                 <p>
                     <label for="password">パスワード</label>
                 </p>
-                <input class="form-control" type="password" id="password" name="password">
+                <input class="form-control" type="password"  id="password" th:field="*{password}">
             </div>
             <p><input class="btn btn-primary" type="submit" value="ログイン"></p>
         </div>

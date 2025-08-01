@@ -22,7 +22,7 @@ public class WebSecurityConfig {
                           .loginPage(UrlConst.LOGIN)
                           .usernameParameter(USERNAME_PARAMETER)          // 自定义登录画面
                           .defaultSuccessUrl(UrlConst.MENU)   // 登录成功后跳转
-                          .failureUrl("/login?error")
+                          //.failureUrl("/login?error")
                 );
         return http.build();
     }
