@@ -64,21 +64,7 @@ public class LoginController {
     @GetMapping(value = UrlConst.LOGIN, params = "error")
     public String viewWithError(Model model, LoginForm loginForm) {
         var errorInfo = (Exception) session.getAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
-//        String errorMsg = "ログインに失敗しました。";
-//        if (errorInfo instanceof BadCredentialsException) {
-//            errorMsg = "ユーザー名またはパスワードが正しくありません。";
-//        } else if (errorInfo instanceof LockedException) {
-//            errorMsg = "アカウントがロックされています。";
-//        } else if (errorInfo instanceof DisabledException) {
-//            errorMsg = "アカウントが無効になっています。";
-//        } else if (errorInfo instanceof AccountExpiredException) {
-//            errorMsg = "アカウントの有効期限が切れています。";
-//        } else if (errorInfo instanceof CredentialsExpiredException) {
-//            errorMsg = "パスワードの有効期限が切れています。";
-//        }
-
         model.addAttribute("errorMsg", errorInfo.getMessage());
         return "login";
     }
-
 }
