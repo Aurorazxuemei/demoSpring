@@ -20,7 +20,7 @@ public class SignupServiceImpl implements SignupService {
 
     public final UserInfoRepository repository;
     private final Mapper mapper;
-    private final PasswordEncoder passwordEncoder=new BCryptPasswordEncoder();
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public Optional<UserInfo> registerUserInfo(SignupForm form){
