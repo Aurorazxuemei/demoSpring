@@ -44,4 +44,32 @@ import java.time.LocalDateTime;
 
         @Column(name = "update_time")
         private LocalDateTime updateTime;
+
+
+        /**
+         * ログイン失敗回数をインクリメントする
+         *
+         * @return ログイン失敗回数がインクリメントされたUserInfo
+         */
+        public UserInfo incrementLoginFailureCount() {
+            return new UserInfo(loginId, password, ++loginFailureCount, accountLockedTime, userStatusKind,authorityKind,createTime,updateTime);
+        }
+
+        /**
+         * ログイン失敗情報をリセットする
+         *
+         * @return ログイン失敗情報がリセットされたUserInfo
+         */
+        public UserInfo resetLoginFailureInfo() {
+            return new UserInfo(loginId, password, 0, null, userStatusKind,authorityKind,createTime,updateTime);
+        }
+
+        /**
+         * アカウントロック状態に更新する
+         *
+         * @return ログイン失敗階位数、アカウントロック日時が更新されたUserInfo
+         */
+        public UserInfo updateAccountLocked() {
+            return new UserInfo(loginId, password, 0, LocalDateTime.now(), userStatusKind,authorityKind,createTime,updateTime);
+        }
 }
