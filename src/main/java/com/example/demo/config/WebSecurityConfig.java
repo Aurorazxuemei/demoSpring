@@ -36,9 +36,11 @@ public class WebSecurityConfig {
                 .formLogin(login -> login
                           .loginPage(UrlConst.LOGIN)
                           .usernameParameter(USERNAME_PARAMETER)          // 自定义登录画面
-                          .defaultSuccessUrl(UrlConst.MENU)   // 登录成功后跳转
+                          .defaultSuccessUrl(UrlConst.MENU))  // 登录成功后跳转
                           //.failureUrl("/login?error")
-                );
+
+                .logout(logout ->logout.logoutSuccessUrl(UrlConst.SIGNUP));
+
         return http.build();
     }
     /**
