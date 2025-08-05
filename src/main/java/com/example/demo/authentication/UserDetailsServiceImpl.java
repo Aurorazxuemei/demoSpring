@@ -40,7 +40,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 && accountLockedTime.plusHours(lockingTime).isAfter(LocalDateTime.now());
         return User.withUsername(userInfo.getLoginId())
                 .password(userInfo.getPassword())
-                .roles("USER")
+                //.roles("USER")
+                .authorities(userInfo.getAuthorityKind().getCode())
                 .disabled(userInfo.getUserStatusKind().isDisabled())
                 .accountLocked(isAccountLocked)
                 .build();

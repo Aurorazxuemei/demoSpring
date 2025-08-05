@@ -22,6 +22,12 @@ public class SignupServiceImpl implements SignupService {
     private final Mapper mapper;
     private final PasswordEncoder passwordEncoder;
 
+    /**
+     * ユーザー情報テーブル　新規登録
+     * @param form　入力情報
+     * {@code @return　登録情報（ユーザー情報Entity）,既に同じユーザーIDで登録がある場合はEmpty
+     *
+     */
     @Override
     public Optional<UserInfo> registerUserInfo(SignupForm form){
         var userInfoExistedOpt =repository.findById(form.getLoginId());
