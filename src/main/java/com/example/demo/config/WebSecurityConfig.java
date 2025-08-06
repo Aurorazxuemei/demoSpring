@@ -13,6 +13,12 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+
+/**
+ *Spring Securityカスタマイズクラス
+ *
+ * @author 張雪梅
+ */
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
@@ -26,6 +32,20 @@ public class WebSecurityConfig {
     private final MessageSource messageSource;
     /**ユーザー名のname属性*/
     private final String USERNAME_PARAMETER = "loginId";
+
+    /**
+     * Spring Securityの各種カスタマイズを行います。
+     * <p>カスタマイズ設定するのは、以下の項目になります。
+     * <ul>
+     * <li>認証不要URL</li>
+     * <li>ログイン画面のURL</li>
+     * <li>usernameとして利用するリクエストパラメーター名</li>
+     * <li>ログイン成功時のリダイレクト先URL</li>
+     * </ul>
+     * @param http　セキュリティ設定
+     * @return　カスタマイズ結果
+     * @throws Exception　予期せぬ例外が発生した場合
+     */
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
       http
@@ -35,9 +55,8 @@ public class WebSecurityConfig {
                 )
                 .formLogin(login -> login
                           .loginPage(UrlConst.LOGIN)
-                          .usernameParameter(USERNAME_PARAMETER)          // 自定义登录画面
-                          .defaultSuccessUrl(UrlConst.MENU))  // 登录成功后跳转
-                          //.failureUrl("/login?error")
+                          .usernameParameter(USERNAME_PARAMETER)
+                          .defaultSuccessUrl(UrlConst.MENU))
 
                 .logout(logout ->logout.logoutSuccessUrl(UrlConst.SIGNUP));
 
@@ -45,7 +64,14 @@ public class WebSecurityConfig {
     }
     /**
      * Provider定義
+     * Providerのカスタマイズを行い、独自Providerを返却します。
      *
+     * <p>カスタマイズ設定するのは、以下のフィールドになります。
+     * <ul>
+     * <li>UserDetailsService</li>
+     * <li>PasswordEncoder</li>
+     * <li>MessageSource</li>
+     * </ul>
      * @returnカスタマイズProvider情報
      */
     @Bean

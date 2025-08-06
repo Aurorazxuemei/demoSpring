@@ -2,6 +2,11 @@ package com.example.demo.constant;
 
 import lombok.Getter;
 
+/**
+ * ユーザー権限種別Enumクラス
+ *
+ * @author 張雪梅
+ */
 @Getter
 public enum AuthorityKind {
     UNKNOWN("","登録内容が不正"),

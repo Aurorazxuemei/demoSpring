@@ -11,7 +11,9 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
-
+/**
+ * ユーザー情報テーブルEntityクラス
+ */
     @Entity
     @Table(name = "user_info", schema = "spring_dev")
     @Data

@@ -1,7 +1,9 @@
 package com.example.demo.constant;
 
 /**
- * URL定数クラス
+ * リクエストURL定数クラス
+ *
+ * @author 張雪梅
  */
 public class UrlConst {
     /**ログイン画面*/

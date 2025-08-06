@@ -22,7 +22,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
-
+/**
+ * ログイン画面Controller
+ *
+ * @author 張雪梅
+ */
 @Controller
 @RequiredArgsConstructor
 public class LoginController {
@@ -37,6 +41,12 @@ public class LoginController {
 //    private static final String LOGIN_ID = "user";
 //    private static final String PASSWORD = "pwd";
 
+    /**
+     * 画面の初期表示を行います。
+     * @param model　モデル
+     * @param loginForm　入力情報
+     * @return　ログイン画面
+     */
     @GetMapping(UrlConst.LOGIN)
     public String View(Model model, LoginForm loginForm) {
         model.addAttribute("loginForm", loginForm);
@@ -60,7 +70,12 @@ public class LoginController {
 //        }
 //    }
 
-    //Spring Security のログイン失敗時に呼ばれる処理
+    /**
+     * ログインエラー時にセッションからエラーメッセージを取得して、画面の表示を行います。
+     * @param model　モデル
+     * @param loginForm　入力情報
+     * @return　ログイン画面
+     */
     @GetMapping(value = UrlConst.LOGIN, params = "error")
     public String viewWithError(Model model, LoginForm loginForm) {
         var errorInfo = (Exception) session.getAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
