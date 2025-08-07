@@ -45,6 +45,7 @@ dependencies {
 	implementation 'org.webjars:jquery:3.3.1'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
+	implementation("org.springframework.boot:spring-boot-starter-aop:4.0.0-M1")
 }
 
 tasks.named('test') {
