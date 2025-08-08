@@ -28,7 +28,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     private UserInfoRepository userInfoRepository;
     /**アカウントロックの継続時間*/
     //private final int LOCKING_TIME = 1;
-    @Value("${security.locking-time")
+    @Value("${security.locking-time}")
     private int lockingTime;
 
     /** アカウントロックを行うログイン失敗回数境界値 */
