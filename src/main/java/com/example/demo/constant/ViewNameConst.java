@@ -11,5 +11,7 @@ public class ViewNameConst {
     public static final String USER_EDIT = "userEdit";
     /**ユーザーエラー画面*/
     public static final String USER_EDIT_ERROR= "userEditError";
+    /**ユーザー登録画面*/
+    public static final String SIGNUP = "signup";
 
 }

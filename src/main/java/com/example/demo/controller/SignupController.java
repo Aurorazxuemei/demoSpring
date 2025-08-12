@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.constant.MessageConst;
 import com.example.demo.constant.SinupMessage;
 import com.example.demo.constant.UrlConst;
+import com.example.demo.constant.ViewNameConst;
 import com.example.demo.entity.UserInfo;
 import com.example.demo.form.LoginForm;
 import com.example.demo.form.SignupForm;
@@ -32,16 +33,21 @@ public class SignupController {
     private final SignupService signupService;
     private final MessageSource messageSource;
 
+    /**画面で使用するフォームクラス名*/
+    private static final String FORM_CLASS_NAME="signupForm";
+
     /**
      * 画面の初期表示を行います。
      * @param model　モデル
-     * @param signupForm　入力情報
      * @return　ユーザー登録画面
      */
     @GetMapping(UrlConst.SIGNUP)
-    public String View(Model model, SignupForm signupForm) {
-        model.addAttribute("signupForm", signupForm);
-        return "signup";
+    public String View(Model model) {
+        var isInitialDisp = !model.containsAttribute(FORM_CLASS_NAME);
+        if (isInitialDisp) {
+            model.addAttribute(FORM_CLASS_NAME, new SignupForm());
+        }
+        return ViewNameConst.SIGNUP;
     }
 
     /**
