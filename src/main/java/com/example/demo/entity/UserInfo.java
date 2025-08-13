@@ -50,6 +50,9 @@ import java.time.LocalDateTime;
         @Column(name = "authority")
         @Convert(converter = UserAuthorityConverter.class)
         private AuthorityKind authorityKind;
+        /** 本登録完了有無(仮登録状態ならfalse)*/
+        @Column(name = "is_signup_completed")
+        private boolean signupCompleted;
         /**登録時間*/
         @Column(name = "create_time")
         private LocalDateTime createTime;

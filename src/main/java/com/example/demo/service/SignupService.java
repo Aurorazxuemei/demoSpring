@@ -1,10 +1,9 @@
 package com.example.demo.service;
 
-import com.example.demo.entity.UserInfo;
-import com.example.demo.form.SignupForm;
+import com.example.demo.constant.SignupResult;
+import com.example.demo.dto.SignupInfo;
 
-import java.util.Optional;
 
 public interface SignupService {
-    public Optional<UserInfo> registerUserInfo(SignupForm form);
+    public SignupResult signup(SignupInfo dto);
 }
