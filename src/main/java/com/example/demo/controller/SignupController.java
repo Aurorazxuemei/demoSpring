@@ -19,6 +19,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Optional;
@@ -78,7 +79,9 @@ public class SignupController {
             return AppUtil.doRedirect(UrlConst.SIGNUP);
     }
         session.setAttribute(SessionKeyConst.ONE_TIME_AUTH_LOGIN_ID, form.getLoginId());
+        System.out.println("SIGNUP_CONFIRM = " + UrlConst.SIGNUP_CONFIRM);
         return AppUtil.doRedirect(UrlConst.SIGNUP_CONFIRM);
+
     }
     /**
      * メッセージIDを使ってプロパティファイルからメッセージを取得し、画面に表示します。
@@ -98,4 +101,5 @@ public class SignupController {
             redirectAttributes.addFlashAttribute(BindingResult.MODEL_KEY_PREFIX + FORM_CLASS_NAME, bdResult);
 
     }
+
 }

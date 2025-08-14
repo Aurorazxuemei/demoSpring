@@ -69,7 +69,7 @@ import java.time.LocalDateTime;
          * @return ログイン失敗回数がインクリメントされたUserInfo
          */
         public UserInfo incrementLoginFailureCount() {
-            return new UserInfo(loginId, password,mailAddress,oneTimeCode,oneTimeCodeSendTime, ++loginFailureCount, accountLockedTime, userStatusKind,authorityKind,createTime,updateTime,updateUser);
+            return new UserInfo(loginId, password,mailAddress,oneTimeCode,oneTimeCodeSendTime, ++loginFailureCount, accountLockedTime, userStatusKind,authorityKind,signupCompleted,createTime,updateTime,updateUser);
         }
 
         /**
@@ -78,7 +78,7 @@ import java.time.LocalDateTime;
          * @return ログイン失敗情報がリセットされたUserInfo
          */
         public UserInfo resetLoginFailureInfo() {
-            return new UserInfo(loginId, password,mailAddress,oneTimeCode,oneTimeCodeSendTime, 0, null, userStatusKind,authorityKind,createTime,updateTime,updateUser);
+            return new UserInfo(loginId, password,mailAddress,oneTimeCode,oneTimeCodeSendTime, 0, null, userStatusKind,authorityKind,signupCompleted,createTime,updateTime,updateUser);
         }
 
         /**
@@ -87,6 +87,6 @@ import java.time.LocalDateTime;
          * @return ログイン失敗階位数、アカウントロック日時が更新されたUserInfo
          */
         public UserInfo updateAccountLocked() {
-            return new UserInfo(loginId, password,mailAddress,oneTimeCode,oneTimeCodeSendTime, 0, LocalDateTime.now(), userStatusKind,authorityKind,createTime,updateTime,updateUser);
+            return new UserInfo(loginId, password,mailAddress,oneTimeCode,oneTimeCodeSendTime, 0, LocalDateTime.now(), userStatusKind,authorityKind,signupCompleted,createTime,updateTime,updateUser);
         }
 }
