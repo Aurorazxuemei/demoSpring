@@ -29,5 +29,13 @@ public class MessageConst {
     public static final String SIGNUP_DB_ERROR = "signup.dbError";
     /** ユーザー登録画面：メール送信失敗 */
     public static final String SIGNUP_MAIL_SEND_ERROR = "signup.mailSendError";
+    /** ユーザー登録情報確認画面：不正な画面操作 */
+    public static final String SIGNUP_CONFIRM_INVALID_OPERATION = "signupConfirm.invalidOperation";
+    /** ユーザー登録情報確認画面：ワンタイムコード誤り */
+    public static final String SIGNUP_CONFIRM_WRONG_ONE_TIME_CODE = "signupConfirm.wrongOneTimeCode";
+    /** ユーザー登録情報確認画面：ワンタイムコード有効期限切れ */
+    public static final String SIGNUP_CONFIRM_EXPIRED_ONE_TIME_CODE = "signupConfirm.expiredOneTimeCode";
+    /** ユーザー登録情報確認画面：ユーザー本登録完了 */
+    public static final String SIGNUP_CONFIRM_COMPLETE = "signupConfirm.complete";
 }
 
