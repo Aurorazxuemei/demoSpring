@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.DateTimeException;
 import java.time.LocalDateTime;
 
 /**
@@ -35,7 +36,7 @@ import java.time.LocalDateTime;
         private String oneTimeCode;
         /**ワンタイム有効期限*/
         @Column(name="one_time_code_send_time")
-        private String oneTimeCodeSendTime;
+        private LocalDateTime oneTimeCodeSendTime;
         /**ログイン失敗回数*/
         @Column(name = "login_failure_count")
         private int loginFailureCount;

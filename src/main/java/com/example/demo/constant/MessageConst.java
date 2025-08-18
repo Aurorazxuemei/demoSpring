@@ -37,5 +37,9 @@ public class MessageConst {
     public static final String SIGNUP_CONFIRM_EXPIRED_ONE_TIME_CODE = "signupConfirm.expiredOneTimeCode";
     /** ユーザー登録情報確認画面：ユーザー本登録完了 */
     public static final String SIGNUP_CONFIRM_COMPLETE = "signupConfirm.complete";
+    /** ユーザー登録情報確認画面：仮登録されていない */
+    public static final String SIGNUP_CONFIRM_NOT_EXISTS_TENTATIVE_USER = "signupConfirm.notExistsTentativeUser";
+    /** ユーザー登録情報確認画面：DB更新時エラー */
+    public static final String SIGNUP_CONFIRM_DB_ERROR = "signupConfirm.dbError";
 }
 
