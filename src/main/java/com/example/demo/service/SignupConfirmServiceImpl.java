@@ -25,7 +25,7 @@ public class SignupConfirmServiceImpl implements SignupConfirmService {
             return SignupConfirmStatus.FAILURE_BY_NOT_EXISTS_TENTATIVE_USER;
         }
         var updateUserInfo = userOpt.get();
-        if (!passwordEncoder.matches(oneTimeCode, updateUserInfo.getPassword())) {
+        if (!passwordEncoder.matches(oneTimeCode, updateUserInfo.getOneTimeCode())) {
             return SignupConfirmStatus.FAILURE_BY_WRONG_ONE_TIME_CODE;
         }
         LocalDateTime sendTime = updateUserInfo.getOneTimeCodeSendTime();

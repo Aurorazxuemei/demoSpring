@@ -41,5 +41,9 @@ public class MessageConst {
     public static final String SIGNUP_CONFIRM_NOT_EXISTS_TENTATIVE_USER = "signupConfirm.notExistsTentativeUser";
     /** ユーザー登録情報確認画面：DB更新時エラー */
     public static final String SIGNUP_CONFIRM_DB_ERROR = "signupConfirm.dbError";
+    /** ユーザー登録画面：送信メール本文 */
+    public  static final String SIGNUP_MAIL_TEXT = "signup.mailText";
+    /** ユーザー登録画面：送信メール件名 */
+    public static final String SIGNUP_MAIL_SUBJECT = "singup.mailSubject";
 }
 
