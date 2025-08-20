@@ -56,6 +56,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         var userInfo = userInfoRepository.findById(username)
                 .orElseThrow(() -> new UsernameNotFoundException(username));
+        if(!userInfo.isSignupCompleted()){
+            throw new UsernameNotFoundException(username);
+        }
         var accountLockedTime  = userInfo.getAccountLockedTime();
         var isAccountLocked = accountLockedTime != null
                 && accountLockedTime.plusHours(lockingTime).isAfter(LocalDateTime.now());
@@ -69,7 +72,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     }
 
     /**
-     * 認証失敗時に失敗回数を加算や、ロック日時の更新をおこないます。
+     * 認証失敗時(仮登録時エラーを除く)にログイン失敗回数を加算や、ロック日時の更新をおこないます。
      *
      * <p>ただしロック日時の更新は、ログイン失敗回数が既定の回数(プロパティファイルに設定)に達した際に行われます。
      *
@@ -80,7 +83,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         var loginId = event.getAuthentication().getName();
         userInfoRepository.findById(loginId).ifPresent(userInfo -> {
             userInfoRepository.save(userInfo.incrementLoginFailureCount());
-
+            if (!userInfo.isSignupCompleted()) {
+                return;
+            }
             var isReachFailureCount = userInfo.getLoginFailureCount() == lockingBorderCount;
             if (isReachFailureCount) {
                 userInfoRepository.save(userInfo.updateAccountLocked());
