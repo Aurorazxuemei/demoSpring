@@ -95,8 +95,8 @@ public class SignupController {
      */
         private void editGuideMessage(SignupForm form, BindingResult bdResult, String messageId,
                 RedirectAttributes redirectAttributes) {
-            redirectAttributes.addFlashAttribute("message", AppUtil.getMessage(messageSource, messageId));
-            redirectAttributes.addFlashAttribute("isError", true);
+            redirectAttributes.addFlashAttribute(ModelKey.MESSAGE, AppUtil.getMessage(messageSource, messageId));
+            redirectAttributes.addFlashAttribute(ModelKey.IS_ERROR, true);
             redirectAttributes.addFlashAttribute(form);
             redirectAttributes.addFlashAttribute(BindingResult.MODEL_KEY_PREFIX + FORM_CLASS_NAME, bdResult);
 

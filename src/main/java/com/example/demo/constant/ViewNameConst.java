@@ -17,6 +17,8 @@ public class ViewNameConst {
     public static final String SIGNUP_CONFIRM = "signupConfirm";
     /** ユーザー登録情報確認結果画面 */
     public static final String SIGNUP_COMPLETION = "signupCompletion";
+    /**ユーザー登録画面*/
+    public static final String LOGIN = "login";
 
 
 }

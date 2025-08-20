@@ -1,7 +1,9 @@
 package com.example.demo.controller;
 
 import com.example.demo.constant.MessageConst;
+import com.example.demo.constant.ModelKey;
 import com.example.demo.constant.UrlConst;
+import com.example.demo.constant.ViewNameConst;
 import com.example.demo.form.LoginForm;
 import com.example.demo.service.LoginService;
 import com.example.demo.util.AppUtil;
@@ -79,7 +81,8 @@ public class LoginController {
     @GetMapping(value = UrlConst.LOGIN, params = "error")
     public String viewWithError(Model model, LoginForm loginForm) {
         var errorInfo = (Exception) session.getAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
-        model.addAttribute("errorMsg", errorInfo.getMessage());
-        return "login";
+        model.addAttribute(ModelKey.MESSAGE, errorInfo.getMessage());
+        model.addAttribute(ModelKey.IS_ERROR, true);
+        return ViewNameConst.LOGIN;
     }
 }

@@ -33,7 +33,7 @@ public class UserEditController {
 //        var loginId = userListForm.getLoginId();
         var userInfoOpt = service.searchUserInfo(loginId);
         if (userInfoOpt.isEmpty()) {
-            model.addAttribute("message",AppUtil.getMessage(messageSource,MessageConst.USEREDIT_NON_EXISTED_LOGIN_ID));
+            model.addAttribute(ModelKey.MESSAGE,AppUtil.getMessage(messageSource,MessageConst.USEREDIT_NON_EXISTED_LOGIN_ID));
             return ViewNameConst.USER_EDIT_ERROR;
         }
         setupCommonInfo(model,userInfoOpt.get());
@@ -54,12 +54,12 @@ public class UserEditController {
     UserEditResult updateResult = service.updateUserInfo(updateDto);
     var updateMessage = updateResult.getUpdateMessage();
     if(updateMessage == UserEditMessage.FAILED){
-        model.addAttribute("message",AppUtil.getMessage(messageSource,updateMessage.getMessageId()));
+        model.addAttribute(ModelKey.MESSAGE,AppUtil.getMessage(messageSource,updateMessage.getMessageId()));
         return ViewNameConst.USER_EDIT_ERROR;
     }
     setupCommonInfo(model,updateResult.getUpdateUserInfo());
-    model.addAttribute("isError",false);
-    model.addAttribute("message", AppUtil.getMessage(messageSource,updateMessage.getMessageId()));
+    model.addAttribute(ModelKey.IS_ERROR,false);
+    model.addAttribute(ModelKey.MESSAGE, AppUtil.getMessage(messageSource,updateMessage.getMessageId()));
     return ViewNameConst.USER_EDIT;
     }
 

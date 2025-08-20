@@ -32,8 +32,8 @@ public class SignupConfirmController {
     public String signupConfirm(String oneTimeCode, RedirectAttributes redirectAttributes) {
         String loginId = (String) session.getAttribute(SessionKeyConst.ONE_TIME_AUTH_LOGIN_ID);
         if (loginId == null) {
-            redirectAttributes.addFlashAttribute("message", AppUtil.getMessage(messageSource, MessageConst.SIGNUP_CONFIRM_INVALID_OPERATION));
-            redirectAttributes.addFlashAttribute("isError", true);
+            redirectAttributes.addFlashAttribute(ModelKey.MESSAGE, AppUtil.getMessage(messageSource, MessageConst.SIGNUP_CONFIRM_INVALID_OPERATION));
+            redirectAttributes.addFlashAttribute(ModelKey.IS_ERROR, true);
             return AppUtil.doRedirect(UrlConst.SIGNUP_CONFIRM);
         }
         var signupConfirmStatus = service.chkTentativeSignupUser(loginId, oneTimeCode);
@@ -41,8 +41,8 @@ public class SignupConfirmController {
         // 次画面にワンタイムコード認証結果の情報を渡す
         var message = AppUtil.getMessage( messageSource,signupConfirmStatus.getMessageId());
         var isError = signupConfirmStatus != SignupConfirmStatus.SUCCEED;
-        redirectAttributes.addFlashAttribute("message", message);
-        redirectAttributes.addFlashAttribute("isError", isError);
+        redirectAttributes.addFlashAttribute(ModelKey.MESSAGE, message);
+        redirectAttributes.addFlashAttribute(ModelKey.IS_ERROR, isError);
         if (isError){
             return AppUtil.doRedirect(UrlConst.SIGNUP_CONFIRM);
         }

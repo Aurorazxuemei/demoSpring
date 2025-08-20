@@ -6,10 +6,9 @@
 </head>
 <body>
 <div th:insert="~{common/sourceList::sourceList}"></div>
-<div th:replace="~{common/messageIcon::messageIcon}"></div>
 <div class="container-fluid">
     <h2>ログイン画面</h2>
-    <span th:text="${errorMsg}"> </span>
+    <div th:insert="~{common/guideMessage :: guideMessage}"></div>
     <form th:action="@{/login}" method="post" th:object="${loginForm}">
         <div class="form-group">
             <div class="col-3 col-md-2 col-xxl-1">
