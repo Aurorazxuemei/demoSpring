@@ -2,9 +2,8 @@ package com.example.demo.service;
 
 import com.example.demo.constant.UserDeleteResult;
 import com.example.demo.dto.UserListInfo;
-import com.example.demo.dto.UserSerchInfo;
+import com.example.demo.dto.UserSearchInfo;
 import com.example.demo.entity.UserInfo;
-import com.example.demo.form.UserListForm;
 import com.example.demo.repository.UserInfoRepository;
 import com.example.demo.util.AppUtil;
 import lombok.RequiredArgsConstructor;
@@ -45,7 +44,7 @@ public class UserListServiceImpl implements UserListService {
     }
 
     @Override
-    public List<UserListInfo> editUserListByParam(UserSerchInfo dto) {
+    public List<UserListInfo> editUserListByParam(UserSearchInfo dto) {
         var userInfo = mapper.map(dto, UserInfo.class);
         return toUserListInfos(findUserInfoByParam(userInfo));
     }

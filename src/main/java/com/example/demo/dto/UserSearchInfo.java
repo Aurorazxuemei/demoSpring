@@ -13,7 +13,7 @@ import org.hibernate.validator.constraints.Length;
      *
      */
     @Data
-    public class UserSerchInfo {
+    public class UserSearchInfo {
 
         /** ログインID */
         @Length(min = 8, max = 20)

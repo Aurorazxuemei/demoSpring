@@ -17,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import com.example.demo.dto.UserEditResult;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequiredArgsConstructor
@@ -25,42 +26,52 @@ public class UserEditController {
     private final HttpSession session;
     private final Mapper mapper;
     private final MessageSource messageSource;
+    /** リダイレクトパラメータ：エラー有 */
+    private static final String REDIRECT_PRAM_ERR = "err";
 
     @GetMapping(UrlConst.USER_EDIT)
     public String view(Model model, UserEditForm form) throws Exception {
         var loginId = (String) session.getAttribute(SessionKeyConst.SELECETED_LOGIN_ID);
-//        var userListForm = (UserListForm) session.getAttribute(SessionKeyConst.SELECETED_LOGIN_ID);
-//        var loginId = userListForm.getLoginId();
         var userInfoOpt = service.searchUserInfo(loginId);
         if (userInfoOpt.isEmpty()) {
             model.addAttribute(ModelKey.MESSAGE,AppUtil.getMessage(messageSource,MessageConst.USEREDIT_NON_EXISTED_LOGIN_ID));
             return ViewNameConst.USER_EDIT_ERROR;
         }
-        setupCommonInfo(model,userInfoOpt.get());
-        return ViewNameConst.USER_EDIT;
-    }
-
-    private void setupCommonInfo(Model model, UserInfo userInfo) {
+       var userInfo = userInfoOpt.get();
         model.addAttribute("userEditForm", mapper.map(userInfo, UserEditForm.class));
         model.addAttribute("userEditInfo", mapper.map(userInfo, UserEditInfo.class));
         model.addAttribute("userStatusKindOptions", UserStatusKind.values());
         model.addAttribute("authorityKindOptions", AuthorityKind.values());
+        return ViewNameConst.USER_EDIT;
+    }
+    /**
+     * 画面の更新エラー時にエラーメッセージを表示します。
+     *
+     * @param model モデル
+     * @return ユーザー編集エラー画面テンプレート名
+     */
+    @GetMapping(value = UrlConst.USER_EDIT, params = REDIRECT_PRAM_ERR)
+    public String viewWithError(Model model) {
+        return ViewNameConst.USER_EDIT_ERROR;
     }
 
     @PostMapping(value=UrlConst.USER_EDIT,params = "update")
-    public String updateUser(Model model,UserEditForm form){
+    public String updateUser(UserEditForm form, RedirectAttributes redirectAttributes){
     var updateDto = mapper.map(form, UserUpdateInfo.class);
     updateDto.setLoginId((String)session.getAttribute(SessionKeyConst.SELECETED_LOGIN_ID));
     UserEditResult updateResult = service.updateUserInfo(updateDto);
     var updateMessage = updateResult.getUpdateMessage();
     if(updateMessage == UserEditMessage.FAILED){
-        model.addAttribute(ModelKey.MESSAGE,AppUtil.getMessage(messageSource,updateMessage.getMessageId()));
-        return ViewNameConst.USER_EDIT_ERROR;
+        redirectAttributes.addFlashAttribute(ModelKey.MESSAGE,AppUtil.getMessage(messageSource,updateMessage.getMessageId()));
+        // リダイレクト時に URL パラメータ (?err) を付与して、エラーハンドラ(@GetMapping(..., params="err"))を呼び出すため
+        redirectAttributes.addAttribute(REDIRECT_PRAM_ERR, "");
+        //return ViewNameConst.USER_EDIT_ERROR;
+        return AppUtil.doRedirect(UrlConst.USER_EDIT);
     }
-    setupCommonInfo(model,updateResult.getUpdateUserInfo());
-    model.addAttribute(ModelKey.IS_ERROR,false);
-    model.addAttribute(ModelKey.MESSAGE, AppUtil.getMessage(messageSource,updateMessage.getMessageId()));
-    return ViewNameConst.USER_EDIT;
+    //setupCommonInfo(model,updateResult.getUpdateUserInfo());
+    redirectAttributes.addFlashAttribute(ModelKey.IS_ERROR,false);
+    redirectAttributes.addFlashAttribute(ModelKey.MESSAGE, AppUtil.getMessage(messageSource,updateMessage.getMessageId()));
+    return AppUtil.doRedirect(UrlConst.USER_EDIT);
     }
 
 
