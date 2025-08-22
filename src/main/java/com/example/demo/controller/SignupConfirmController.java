@@ -22,12 +22,23 @@ public class SignupConfirmController {
     private final HttpSession session;
     private final MessageSource messageSource;
     private final SignupConfirmService service;
+    /**
+     * 画面の初期表示を行います。
+     *
+     * @return ユーザー本登録完了画面テンプレート名
+     */
 
     @GetMapping(UrlConst.SIGNUP_CONFIRM)
     public String view() {
         return ViewNameConst.SIGNUP_CONFIRM;
     }
-
+    /**
+     * 画面に入力されたワンタイムコードの認証を行います。
+     *
+     * @param oneTimeCode 入力されたワンタイムコード
+     * @param redirectAttributes リダイレクト用オブジェクト
+     * @return リダイレクトURL
+     */
     @PostMapping(UrlConst.SIGNUP_CONFIRM)
     public String signupConfirm(String oneTimeCode, RedirectAttributes redirectAttributes) {
         String loginId = (String) session.getAttribute(SessionKeyConst.ONE_TIME_AUTH_LOGIN_ID);
@@ -36,7 +47,7 @@ public class SignupConfirmController {
             redirectAttributes.addFlashAttribute(ModelKey.IS_ERROR, true);
             return AppUtil.doRedirect(UrlConst.SIGNUP_CONFIRM);
         }
-        var signupConfirmStatus = service.chkTentativeSignupUser(loginId, oneTimeCode);
+        var signupConfirmStatus = service.updateUserAsSignupCompletion(loginId, oneTimeCode);
 
         // 次画面にワンタイムコード認証結果の情報を渡す
         var message = AppUtil.getMessage( messageSource,signupConfirmStatus.getMessageId());

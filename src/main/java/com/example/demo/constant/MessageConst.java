@@ -11,8 +11,6 @@ public class MessageConst {
     public static final String USEREDIT_UPDATE_SUCCEED = "userEdit.updateSucceed";
     /** ユーザー情報編集画面：存在しないログインID */
     public static final String USEREDIT_NON_EXISTED_LOGIN_ID = "userEdit.nonExistedLoginId";
-    /**ログイン画面:入力内容誤り*/
-    public static final String LOGIN_WRONG_INPUT = "login.wrongInput";
     /**ユーザー登録画面:既に登録されたログインID*/
     public static final String SIGNUP_EXISTED_LOGIN_ID = "signup.existedLoginId";
     /**ユーザー登録画面:ユーザー登録完了*/

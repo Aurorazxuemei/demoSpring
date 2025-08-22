@@ -19,7 +19,7 @@ public class SignupConfirmServiceImpl implements SignupConfirmService {
     private static final long CODE_EXPIRATION_MINUTES = 3;
 
     @Override
-    public SignupConfirmStatus chkTentativeSignupUser(String loginId, String oneTimeCode) {
+    public SignupConfirmStatus updateUserAsSignupCompletion(String loginId, String oneTimeCode) {
         var userOpt = userInfoRepository.findById(loginId);
         if (userOpt.isEmpty()) {
             return SignupConfirmStatus.FAILURE_BY_NOT_EXISTS_TENTATIVE_USER;

@@ -6,6 +6,9 @@ import com.example.demo.entity.UserInfo;
 
 import java.util.Optional;
 
+/**
+ * ユーザー編集画面Serviceインターフェース
+ */
 public interface UserEditService {
 
    //public UserInfo searchUserInfo(String loginId);

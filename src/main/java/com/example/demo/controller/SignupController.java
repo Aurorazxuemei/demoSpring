@@ -46,7 +46,7 @@ public class SignupController {
     /**
      * 画面の初期表示を行います。
      * @param model　モデル
-     * @return　ユーザー登録画面
+     * @return ユーザー登録画面テンプレート名
      */
     @GetMapping(UrlConst.SIGNUP)
     public String View(Model model) {
@@ -65,6 +65,7 @@ public class SignupController {
      * @param form　フォームの入力情報
      * @param bindingResult　入力内容の単項目チェック結果
      * @param redirectAttributes リダイレクト用モデル
+     * @return リダイレクトURL
      */
     @PostMapping(UrlConst.SIGNUP)
     public String signup(@Validated SignupForm form, BindingResult bindingResult, RedirectAttributes redirectAttributes) {

@@ -6,6 +6,9 @@ import com.example.demo.dto.UserSearchInfo;
 
 import java.util.List;
 
+/**
+ * ユーザー一覧画面Serviceインターフェース
+ */
 public interface UserListService {
     /**
      * ユーザー情報テーブルを全件検索し、ユーザー一覧画面に必要な情報へ変換して返却します。

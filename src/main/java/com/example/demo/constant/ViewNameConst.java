@@ -19,6 +19,8 @@ public class ViewNameConst {
     public static final String SIGNUP_COMPLETION = "signupCompletion";
     /**ユーザー登録画面*/
     public static final String LOGIN = "login";
+    /**メニュー画面*/
+    public static final String MENU =  "menu";
 
 
 }
