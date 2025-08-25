@@ -21,6 +21,6 @@ public class ViewNameConst {
     public static final String LOGIN = "login";
     /**メニュー画面*/
     public static final String MENU =  "menu";
-
-
+    /**商品一覧画面*/
+    public static final String ITEM =  "item";
 }

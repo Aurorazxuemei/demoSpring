@@ -22,6 +22,8 @@ public class UrlConst {
     public static final String USER_LIST = "/userList";
     /**ユーザー編集画面*/
     public static final String USER_EDIT = "/userEdit";
+    /** 商品一覧画面 */
+    public static final String ITEM_LIST = "/itemList";
 
 
 }
