@@ -1,10 +1,10 @@
 package com.example.demo.service;
 
 import com.example.demo.constant.UserDeleteResult;
-import com.example.demo.dto.StaffInfo;
-import com.example.demo.dto.UserListInfo;
-import com.example.demo.dto.UserSearchInfo;
+import com.example.demo.dto.*;
+import com.example.demo.entity.ItemInfo;
 import com.example.demo.entity.UserInfo;
+import com.example.demo.repository.ItemInfoRepository;
 import com.example.demo.repository.UserInfoRepository;
 import com.example.demo.util.AppUtil;
 import com.github.dozermapper.core.Mapper;
@@ -18,11 +18,18 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class ItemListServiceImpl implements ItemListService {
-    private final UserInfoRepository repository;
+    /**
+     * ユーザー情報テーブルDAO
+     */
+    private final UserInfoRepository userInfoRepository;
+    /**
+     * 商品情報テーブルDAO
+     */
+    private final ItemInfoRepository itemInfoRepository;
 
     @Override
     public List<StaffInfo> obtainUserIdList() {
-        var UserInfos = repository.findAll();
+        var UserInfos = userInfoRepository.findAll();
         List<StaffInfo> staffInfos = new ArrayList<>();
         for (UserInfo userInfo : UserInfos) {
             var staffInfo = new StaffInfo();
@@ -31,5 +38,18 @@ public class ItemListServiceImpl implements ItemListService {
             staffInfos.add(staffInfo);
         }
         return staffInfos;
+    }
+
+    @Override
+    public List<ItemInfo> editItemListByParam(ItemSearchInfo dto) {
+        String itemName = AppUtil.addWildcard(dto.getItemName());
+        if (dto.getItemName() == null || dto.getArrivalStaff() == null) {
+            return itemInfoRepository.findAll();
+        } else if (dto.getItemName() != null || dto.getArrivalStaff() == null) {
+            return itemInfoRepository.findByItemNameLike(itemName);
+        } else {
+            return itemInfoRepository.findByItemNameLikeAndArrivalStaff(itemName, dto.getArrivalStaff());
+
+        }
     }
 }
