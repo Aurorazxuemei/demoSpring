@@ -53,9 +53,9 @@ public class ItemListController {
      */
     @PostMapping( value = UrlConst.ITEM_LIST,params = "search")
     public String searchItem(ItemListForm form, RedirectAttributes redirectAttributes) {
-        redirectAttributes.addFlashAttribute(KEY_ITEM_LIST_FORM, form);
         var searchDto = mapper.map(form, ItemSearchInfo.class);
         var itemInfos = service.editItemListByParam(searchDto);
+        redirectAttributes.addFlashAttribute(KEY_ITEM_LIST_FORM, form);
         redirectAttributes.addFlashAttribute(KEY_ITEM_LIST, itemInfos);
         redirectAttributes.addFlashAttribute(KEY_OPERATION_KIND, ItemListController.OperationKind.SEARCH);
         return AppUtil.doRedirect(UrlConst.ITEM_LIST);

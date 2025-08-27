@@ -43,6 +43,39 @@
             </table>
             <input type="submit" class="btn btn-primary mt-3" name="search" value="検索">
         </div>
+
+        <div class="mt-3">
+            <!-- itemList が空でない場合：商品一覧を表示 -->
+            <div th:if="${itemList != null and #lists.size(itemList) > 0}">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>商品ID</th>
+                        <th>商品名</th>
+                        <th>価格</th>
+                        <th>入荷日</th>
+                        <th>入荷担当者</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="item : ${itemList}">
+                        <td th:text="${item.itemId}"></td>
+                        <td th:text="${item.itemName}"></td>
+                        <td th:text="${item.price}"></td>
+                        <td th:text="${item.arrivalDate}"></td>
+                        <td th:text="${item.arrivalStaff}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- itemList が空またはnullの場合：メッセージを表示 -->
+            <div th:unless="${itemList != null and #lists.size(itemList) > 0}">
+                <span class="text-danger">※対象の商品は存在しません。</span>
+            </div>
+        </div>
+
+
             <div class="mt-3">
                 <a th:href="@{/menu}">▶トップメニューへ戻る</a>
             </div>

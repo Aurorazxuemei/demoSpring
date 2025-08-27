@@ -14,20 +14,19 @@ import java.time.LocalDateTime;
 public class ItemInfo {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "item_id")
-    private Long itemId; // 主キー
+    private String itemId; // 主キー
 
     @Column(name = "item_name", nullable = false, length = 255)
     private String itemName; // 商品名
 
-    @Column(name = "price", nullable = false, precision = 10, scale = 2)
+    @Column(name = "price", precision = 10, scale = 2)
     private BigDecimal price; // 単価
 
-    @Column(name = "arrival_date", nullable = false)
+    @Column(name = "arrival_date")
     private LocalDate arrivalDate; // 入荷日
 
-    @Column(name = "arrival_staff", nullable = false, length = 100)
+    @Column(name = "arrival_staff", length = 100)
     private String arrivalStaff; // 入荷担当者
 
     @Column(name = "created_at", updatable = false)

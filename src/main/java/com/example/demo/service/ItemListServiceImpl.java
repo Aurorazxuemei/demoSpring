@@ -8,6 +8,7 @@ import com.example.demo.repository.ItemInfoRepository;
 import com.example.demo.repository.UserInfoRepository;
 import com.example.demo.util.AppUtil;
 import com.github.dozermapper.core.Mapper;
+import io.micrometer.common.util.StringUtils;
 import lombok.RequiredArgsConstructor;
 import org.eclipse.angus.mail.imap.protocol.Item;
 import org.springframework.stereotype.Service;
@@ -43,13 +44,11 @@ public class ItemListServiceImpl implements ItemListService {
     @Override
     public List<ItemInfo> editItemListByParam(ItemSearchInfo dto) {
         String itemName = AppUtil.addWildcard(dto.getItemName());
-        if (dto.getItemName() == null || dto.getArrivalStaff() == null) {
-            return itemInfoRepository.findAll();
-        } else if (dto.getItemName() != null || dto.getArrivalStaff() == null) {
+        // 入荷担当者が選択されていない時
+        if (StringUtils.isEmpty(dto.getArrivalStaff())) {
             return itemInfoRepository.findByItemNameLike(itemName);
         } else {
             return itemInfoRepository.findByItemNameLikeAndArrivalStaff(itemName, dto.getArrivalStaff());
-
         }
     }
-}
+    }
