@@ -42,7 +42,7 @@ public class ItemListController {
         model.addAttribute(KEY_ITEM_LIST_FORM, form);
        var staffInfos =  service.obtainUserIdList();
         model.addAttribute(KEY_USER_ID_OPTIONS, staffInfos);
-        return ViewNameConst.ITEM;
+        return ViewNameConst.ITEM_LIST;
     }
 
     /**
