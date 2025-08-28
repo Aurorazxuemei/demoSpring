@@ -10,6 +10,7 @@ import com.example.demo.service.ItemListService;
 import com.example.demo.service.UserListService;
 import com.example.demo.util.AppUtil;
 import com.github.dozermapper.core.Mapper;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.eclipse.angus.mail.imap.protocol.Item;
 import org.springframework.stereotype.Controller;
@@ -27,6 +28,7 @@ public class ItemListController {
     private final Mapper mapper;
     private static final String KEY_ITEM_LIST = "itemList";
     private static final String KEY_OPERATION_KIND =  "operationKind";
+    private final HttpSession session;
 
     /**
      * 画面の初期表示を行います。
@@ -59,6 +61,14 @@ public class ItemListController {
         redirectAttributes.addFlashAttribute(KEY_ITEM_LIST, itemInfos);
         redirectAttributes.addFlashAttribute(KEY_OPERATION_KIND, ItemListController.OperationKind.SEARCH);
         return AppUtil.doRedirect(UrlConst.ITEM_LIST);
+    }
+    /**
+     * 選択行の商品情報を削除して、最新情報で画面を再表示します。
+     */
+    @PostMapping(value = UrlConst.ITEM_LIST,params = "edit")
+    public String updateItem(ItemListForm form){
+        session.setAttribute(SessionKeyConst.SELECETED_ITEM_ID,form.getSelectedItemId());
+        return AppUtil.doRedirect(UrlConst.ITEM_EDIT);
     }
     /**
      * 商品一覧画面で行われる操作種別を表す列挙型です。

@@ -12,13 +12,21 @@ import org.hibernate.validator.constraints.Length;
 @Data
 public class ItemListForm {
 
-    /** 商品名*/
+    /**
+     * 商品名
+     */
     @Length(max = 100)
     private String itemName;
 
-    /** 入荷担当者 */
+    /**
+     * 入荷担当者
+     */
     @Length(max = 20)
     private String arrivalStaff;
 
+    /**
+     * 選択された商品ID
+     */
+    private String selectedItemId;
 
 }

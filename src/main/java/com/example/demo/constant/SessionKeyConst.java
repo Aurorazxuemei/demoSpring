@@ -5,4 +5,6 @@ public class SessionKeyConst {
     public  static  final  String  SELECETED_LOGIN_ID ="selectedLoginId";
     /** ワンタイムコード認証を行うログインID */
     public static final String ONE_TIME_AUTH_LOGIN_ID = "oneTimeAuthLoginId";
+    /**選択された商品ID*/
+    public  static  final  String  SELECETED_ITEM_ID ="selectedItemId";
 }
