@@ -48,7 +48,10 @@ public class ItemListServiceImpl implements ItemListService {
         if (StringUtils.isEmpty(dto.getArrivalStaff())) {
             return itemInfoRepository.findByItemNameLike(itemName);
         } else {
-            return itemInfoRepository.findByItemNameLikeAndArrivalStaff(itemName, dto.getArrivalStaff());
+            var UserInfo = userInfoRepository.findById(dto.getArrivalStaff());
+            var staffInfo = new StaffInfo();
+            staffInfo.setUserName(UserInfo.get().getUserName());
+            return itemInfoRepository.findByItemNameLikeAndArrivalStaff(itemName,staffInfo.getUserName());
         }
     }
     }
