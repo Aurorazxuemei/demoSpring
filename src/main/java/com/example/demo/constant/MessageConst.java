@@ -43,5 +43,7 @@ public class MessageConst {
     public  static final String SIGNUP_MAIL_TEXT = "signup.mailText";
     /** ユーザー登録画面：送信メール件名 */
     public static final String SIGNUP_MAIL_SUBJECT = "singup.mailSubject";
+    /** 商品情報編集画面：存在しない商品ID */
+    public static final String USEREDIT_NON_EXISTED_ITEM_ID = "userEdit.nonExistedItemId";
 }
 
