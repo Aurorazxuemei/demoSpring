@@ -1,5 +1,7 @@
 package com.example.demo.service;
 
+import com.example.demo.dto.ItemEditResult;
+import com.example.demo.dto.ItemUpdateInfo;
 import com.example.demo.entity.ItemInfo;
 import com.example.demo.form.ItemEditForm;
 import com.example.demo.form.ItemListForm;
@@ -9,4 +11,5 @@ import java.util.Optional;
 
 public interface ItemEditService {
     Optional<ItemInfo> serchItemInfo(String itemId);
+    ItemEditResult updateItemInfo(ItemUpdateInfo itemUpdateInfo);
 }

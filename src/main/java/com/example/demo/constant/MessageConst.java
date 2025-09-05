@@ -45,5 +45,9 @@ public class MessageConst {
     public static final String SIGNUP_MAIL_SUBJECT = "singup.mailSubject";
     /** 商品情報編集画面：存在しない商品ID */
     public static final String USEREDIT_NON_EXISTED_ITEM_ID = "userEdit.nonExistedItemId";
+    /**商品情報編集画面：商品更新完了*/
+    public static final String ITEMEDIT_UPDATE_SUCCEED = "itemEdit.updateSucceed";
+    /**商品情報編集画面：商品更新失敗*/
+    public static final String ITEMEDIT_UPDATE_FAILED = "itemEdit.updateFailed";
 }
 
