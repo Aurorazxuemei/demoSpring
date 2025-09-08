@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.constant.ItemDeleteResult;
 import com.example.demo.constant.UserDeleteResult;
 import com.example.demo.dto.*;
 import com.example.demo.entity.ItemInfo;
@@ -54,4 +55,14 @@ public class ItemListServiceImpl implements ItemListService {
             return itemInfoRepository.findByItemNameLikeAndArrivalStaff(itemName,staffInfo.getUserName());
         }
     }
+
+    @Override
+    public ItemDeleteResult deleteItemInfoById(String deletedItemId){
+        var itemInfo = itemInfoRepository.findById(deletedItemId);
+        if (itemInfo.isEmpty()) {
+            return ItemDeleteResult.ERROR;
+        }
+        itemInfoRepository.deleteById(deletedItemId);
+        return ItemDeleteResult.SUCCESS;
+}
     }

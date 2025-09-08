@@ -29,4 +29,12 @@ public class ItemListForm {
      */
     private String selectedItemId;
 
+
+/**
+ * 削除後、Formの選択されたログインID不要の為に、クリアします。
+ */
+    public ItemListForm clearSelectedLoginId(){
+        this.selectedItemId = null;
+        return this;
+    }
 }

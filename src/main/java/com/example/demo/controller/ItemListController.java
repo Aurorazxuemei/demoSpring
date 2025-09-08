@@ -13,6 +13,7 @@ import com.github.dozermapper.core.Mapper;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.eclipse.angus.mail.imap.protocol.Item;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,6 +30,7 @@ public class ItemListController {
     private static final String KEY_ITEM_LIST = "itemList";
     private static final String KEY_OPERATION_KIND =  "operationKind";
     private final HttpSession session;
+    private final MessageSource messageSource;
 
     /**
      * 画面の初期表示を行います。
@@ -69,6 +71,24 @@ public class ItemListController {
     public String updateItem(ItemListForm form){
         session.setAttribute(SessionKeyConst.SELECETED_ITEM_ID,form.getSelectedItemId());
         return AppUtil.doRedirect(UrlConst.ITEM_EDIT);
+    }
+    /**
+     * 選択された行を削除する
+     *
+     * @param form 商品一覧表
+     * @param redirectAttributes リダイレクト用オブジェクト
+     * @return 表示画面
+     */
+    @PostMapping(value = UrlConst.ITEM_LIST,params = "delete")
+    public String deleteItem(ItemListForm form,RedirectAttributes redirectAttributes){
+        var deletedItemId = form.getSelectedItemId();
+        var executeResult = service.deleteItemInfoById(deletedItemId);
+        redirectAttributes.addFlashAttribute(ModelKey.IS_ERROR, executeResult == ItemDeleteResult.ERROR);
+        redirectAttributes.addFlashAttribute(ModelKey.MESSAGE,AppUtil.getMessage(messageSource,executeResult.getMessageId()));
+        //削除後、Formの選択されたログインID不要の為に、クリアします。
+        redirectAttributes.addFlashAttribute(KEY_ITEM_LIST_FORM,form.clearSelectedLoginId());
+        redirectAttributes.addFlashAttribute(KEY_OPERATION_KIND, OperationKind.DELETE);
+        return AppUtil.doRedirect(UrlConst.ITEM_LIST);
     }
     /**
      * 商品一覧画面で行われる操作種別を表す列挙型です。

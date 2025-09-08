@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.constant.ItemDeleteResult;
 import com.example.demo.constant.UserDeleteResult;
 import com.example.demo.dto.*;
 import com.example.demo.entity.ItemInfo;
@@ -23,5 +24,10 @@ public interface ItemListService {
      * @return 商品情報テーブルの該当登録情報
      */
     public List<ItemInfo> editItemListByParam(ItemSearchInfo dto);
-
+    /**
+     * 画面選択された行を削除する
+     *
+     * @return 削除結果
+     */
+    public ItemDeleteResult deleteItemInfoById(String deletedItemId);
 }

@@ -49,5 +49,9 @@ public class MessageConst {
     public static final String ITEMEDIT_UPDATE_SUCCEED = "itemEdit.updateSucceed";
     /**商品情報編集画面：商品更新失敗*/
     public static final String ITEMEDIT_UPDATE_FAILED = "itemEdit.updateFailed";
+    /** ユーザー一覧画面：商品削除完了 */
+    public static final String ITEMLIST_DELETE_SUCCEED = "itemList.deleteSucceed";
+    /** ユーザー一覧画面：存在しない商品ID */
+    public static final String ITEMLIST_NON_EXISTED_ITEM_ID = "itemList.nonExistedItemId";
 }
 
