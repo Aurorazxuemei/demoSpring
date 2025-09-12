@@ -48,7 +48,7 @@ public class ItemAddController {
     }
 
     @PostMapping(value=UrlConst.ITEM_EDIT,params = "add")
-    public String view(@Validated ItemAddForm form, BindingResult bindingResult, RedirectAttributes redirectAttributes) throws Exception {
+    public String add(@Validated ItemAddForm form, BindingResult bindingResult, RedirectAttributes redirectAttributes) throws Exception {
         redirectAttributes.addFlashAttribute("itemAddForm", form);
         if(bindingResult.hasErrors()) {
             editGuideMessage(form,bindingResult,MessageConst.FORM_ERROR,redirectAttributes);

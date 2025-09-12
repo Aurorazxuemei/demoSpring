@@ -53,5 +53,11 @@ public class MessageConst {
     public static final String ITEMLIST_DELETE_SUCCEED = "itemList.deleteSucceed";
     /** ユーザー一覧画面：存在しない商品ID */
     public static final String ITEMLIST_NON_EXISTED_ITEM_ID = "itemList.nonExistedItemId";
+    /** 商品登録画面：商品登録完了 */
+    public static final String ITEM_ADD_SUCCEED = "item.addSucceed";
+    /** 商品登録画面：既に登録済み */
+    public static final String ITEM_ALREADY_COMPLETED = "item.alreadyCompleted";
+    /** 商品登録画面：DB更新時エラー */
+    public static final String ITEM_DB_ERROR = "item.dbError";
 }
 

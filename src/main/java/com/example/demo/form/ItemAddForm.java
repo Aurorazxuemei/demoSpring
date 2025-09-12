@@ -3,6 +3,8 @@ package com.example.demo.form;
 import jakarta.validation.constraints.*;
 import lombok.Data;
 
+import java.time.LocalDate;
+
 /**
  * 商品登録画面Form
  */
@@ -23,7 +25,7 @@ public class ItemAddForm {
     // 入荷日（YYYY-MM-DD の形式）
     @NotNull(message = "入荷日は必須です")
     @Pattern(regexp = "^\\d{4}-\\d{2}-\\d{2}$", message = "日付は YYYY-MM-DD の形式で入力してください")
-    private String arrivalDate;
+    private LocalDate arrivalDate;
 
     // 入荷担当者（任意・100文字以内）
     @Size(max = 100, message = "入荷担当者は100文字以内で入力してください")

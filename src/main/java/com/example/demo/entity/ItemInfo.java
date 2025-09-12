@@ -14,8 +14,9 @@ import java.time.LocalDateTime;
 public class ItemInfo {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // 自動増分
     @Column(name = "item_id")
-    private String itemId; // 主キー
+    private Integer itemId;//主キー
 
     @Column(name = "item_name", nullable = false, length = 255)
     private String itemName; // 商品名
