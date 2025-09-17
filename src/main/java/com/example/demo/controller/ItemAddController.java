@@ -56,7 +56,13 @@ public class ItemAddController {
         }
         var itemInfoDto = mapper.map(form, ItemAddInfo.class);
         var addResult = service.addItem(itemInfoDto);
-
+        var isError = addResult != ItemAddResult.SUCCEED;
+        if(isError) {
+            editGuideMessage(form,bindingResult,addResult.getMessageId(),redirectAttributes);
+            return ViewNameConst.ITEM_ADD;
+        }
+        redirectAttributes.addFlashAttribute(ModelKey.IS_ERROR,false);
+        redirectAttributes.addFlashAttribute(ModelKey.MESSAGE,AppUtil.getMessage(messageSource,addResult.getMessageId()));
         return AppUtil.doRedirect(UrlConst.ITEM_ADD);
     }
 

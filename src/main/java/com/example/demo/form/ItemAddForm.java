@@ -24,7 +24,7 @@ public class ItemAddForm {
 
     // 入荷日（YYYY-MM-DD の形式）
     @NotNull(message = "入荷日は必須です")
-    @Pattern(regexp = "^\\d{4}-\\d{2}-\\d{2}$", message = "日付は YYYY-MM-DD の形式で入力してください")
+    @PastOrPresent
     private LocalDate arrivalDate;
 
     // 入荷担当者（任意・100文字以内）
