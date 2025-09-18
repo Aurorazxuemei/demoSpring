@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface ItemInfoRepository extends JpaRepository<ItemInfo, String> {
+public interface ItemInfoRepository extends JpaRepository<ItemInfo, Integer> {
     /**
      * 商品名の部分名一致検索を行います。
      * @param itemName 商品名

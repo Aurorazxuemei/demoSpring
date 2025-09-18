@@ -16,7 +16,7 @@ import java.util.Optional;
 public class ItemEditServiceImpl implements ItemEditService {
     private final ItemInfoRepository repository;
     @Override
-    public Optional<ItemInfo> serchItemInfo(String itemId){
+    public Optional<ItemInfo> serchItemInfo(Integer itemId){
         return repository.findById(itemId);
 
     }

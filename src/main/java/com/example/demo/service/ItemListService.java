@@ -29,5 +29,5 @@ public interface ItemListService {
      *
      * @return 削除結果
      */
-    public ItemDeleteResult deleteItemInfoById(String deletedItemId);
+    public ItemDeleteResult deleteItemInfoById(Integer deletedItemId);
 }

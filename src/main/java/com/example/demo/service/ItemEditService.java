@@ -10,6 +10,6 @@ import org.springframework.ui.Model;
 import java.util.Optional;
 
 public interface ItemEditService {
-    Optional<ItemInfo> serchItemInfo(String itemId);
+    Optional<ItemInfo> serchItemInfo(Integer itemId);
     ItemEditResult updateItemInfo(ItemUpdateInfo itemUpdateInfo);
 }

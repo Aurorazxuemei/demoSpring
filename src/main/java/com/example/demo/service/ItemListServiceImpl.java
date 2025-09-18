@@ -57,7 +57,7 @@ public class ItemListServiceImpl implements ItemListService {
     }
 
     @Override
-    public ItemDeleteResult deleteItemInfoById(String deletedItemId){
+    public ItemDeleteResult deleteItemInfoById(Integer deletedItemId){
         var itemInfo = itemInfoRepository.findById(deletedItemId);
         if (itemInfo.isEmpty()) {
             return ItemDeleteResult.ERROR;

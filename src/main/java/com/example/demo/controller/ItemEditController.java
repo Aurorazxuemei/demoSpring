@@ -30,7 +30,7 @@ public class ItemEditController {
 
     @GetMapping(UrlConst.ITEM_EDIT)
     public String view(Model model, ItemEditForm form) throws Exception {
-        var itemId = (String)session.getAttribute(SessionKeyConst.SELECETED_ITEM_ID);
+        var itemId = (Integer)session.getAttribute(SessionKeyConst.SELECETED_ITEM_ID);
         var itemInfoOpt = service.serchItemInfo(itemId);
         if (itemInfoOpt.isEmpty()) {
             model.addAttribute(ModelKey.MESSAGE, AppUtil.getMessage(messageSource, MessageConst.USEREDIT_NON_EXISTED_ITEM_ID));
@@ -53,7 +53,6 @@ public class ItemEditController {
     @PostMapping(value =UrlConst.ITEM_EDIT,params = "update")
     public String updateItem(ItemEditForm form, RedirectAttributes redirectAttributes) {
         var updateDto = mapper.map(form, ItemUpdateInfo.class);
-        updateDto.setItemId((String)session.getAttribute(SessionKeyConst.SELECETED_ITEM_ID));
         ItemEditResult updateResult = service.updateItemInfo(updateDto);
         var updateMessage = updateResult.getUpdateMessage();
         if(updateMessage == ItemEditMessage.FAILED){

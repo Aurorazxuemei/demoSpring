@@ -10,7 +10,7 @@ public class ItemUpdateInfo {
     /**
      * 商品ID
      */
-    private String itemId;
+    private Integer itemId;
 
     /**
      * 商品名

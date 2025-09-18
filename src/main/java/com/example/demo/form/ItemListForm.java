@@ -27,7 +27,7 @@ public class ItemListForm {
     /**
      * 選択された商品ID
      */
-    private String selectedItemId;
+    private Integer selectedItemId;
 
 
 /**
