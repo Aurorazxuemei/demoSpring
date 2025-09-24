@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import com.example.demo.constant.ItemDeleteResult;
 import com.example.demo.dto.ItemSearchInfo;
 import com.example.demo.dto.StaffInfo;
 import com.example.demo.entity.ItemInfo;
@@ -94,29 +95,52 @@ public class ItemListServiceTest {
         verify(userInfoRepository, times(1)).findById("u001");
         verify(itemInfoRepository,times(1)).findByItemNameLikeAndArrivalStaff("%pen%", "Tanaka");
     }
-//    @Test
-//    void testEditItemListByParam_WithArrivalStaff_2() {
-//        ItemSearchInfo itemSearchInfo = new ItemSearchInfo();
-//        itemSearchInfo.setItemName("pen");
-//        itemSearchInfo.setArrivalStaff("u001");
-//
-//        UserInfo user1 = new UserInfo();
-//        user1.setLoginId("u001");
-//        user1.setUserName("Tanaka");
-//
-//        ItemInfo item = new ItemInfo();
-//        item.setItemName("pen_red");
-//        ItemInfo item2 = new ItemInfo();
-//        item.setItemName("pen_green");
-//
-//        when(userInfoRepository.findById("u001")).thenReturn(Optional.of(user1));
-//        when(itemInfoRepository.findByItemNameLikeAndArrivalStaff("%pen%", "Tanaka")).thenReturn(Arrays.asList(item,item2));
-//        //実行
-//        List<ItemInfo> result = itemListServiceImpl.editItemListByParam(itemSearchInfo);
-//        //検証
-//        assertEquals(2,result.size());
-//        assertEquals("pen_red",result.get(0).getItemName());
-//        verify(userInfoRepository, times(1)).findById("u001");
-//        verify(itemInfoRepository,times(1)).findByItemNameLikeAndArrivalStaff("%pen%", "Tanaka");
-//    }
+    @Test
+    void testEditItemListByParam_WithArrivalStaff_2() {
+        ItemSearchInfo itemSearchInfo = new ItemSearchInfo();
+        itemSearchInfo.setItemName("pen");
+        itemSearchInfo.setArrivalStaff("u001");
+
+        UserInfo user1 = new UserInfo();
+        user1.setLoginId("u001");
+        user1.setUserName("Tanaka");
+
+        ItemInfo item = new ItemInfo();
+        item.setItemName("pen_red");
+        ItemInfo item2 = new ItemInfo();
+        item2.setItemName("pen_green");
+
+        when(userInfoRepository.findById("u001")).thenReturn(Optional.of(user1));
+        when(itemInfoRepository.findByItemNameLikeAndArrivalStaff("%pen%", "Tanaka")).thenReturn(Arrays.asList(item,item2));
+        //実行
+        List<ItemInfo> result = itemListServiceImpl.editItemListByParam(itemSearchInfo);
+        //検証
+        assertEquals(2,result.size());
+        assertEquals("pen_red",result.get(0).getItemName());
+        assertEquals("pen_green",result.get(1).getItemName());
+        verify(userInfoRepository, times(1)).findById("u001");
+        verify(itemInfoRepository,times(1)).findByItemNameLikeAndArrivalStaff("%pen%", "Tanaka");
+    }
+
+    @Test
+    void testDeleteItemListByParam_NonExistedItem() {
+         Integer deletedItemId = 0;
+         when(itemInfoRepository.findById(deletedItemId)).thenReturn(Optional.empty());
+         ItemDeleteResult result = itemListServiceImpl.deleteItemInfoById(deletedItemId);
+         assertEquals(ItemDeleteResult.ERROR,result);
+         verify(itemInfoRepository, times(1)).findById(deletedItemId);
+         verify(itemInfoRepository, never()).deleteById(any());
+    }
+    @Test
+    void testDeleteItemListByParam_WithExistedItem() {
+        Integer deletedItemId = 1;
+        ItemInfo itemInfo = new ItemInfo();
+        itemInfo.setItemName("pen");
+        itemInfo.setArrivalStaff("u001");
+        when(itemInfoRepository.findById(deletedItemId)).thenReturn(Optional.of(itemInfo));
+        ItemDeleteResult result = itemListServiceImpl.deleteItemInfoById(deletedItemId);
+        assertEquals(ItemDeleteResult.SUCCESS,result);
+        verify(itemInfoRepository, times(1)).findById(deletedItemId);
+        verify(itemInfoRepository, times(1)).deleteById(deletedItemId);
+    }
 }
