@@ -110,7 +110,7 @@ public class SignupServiceImpl implements SignupService {
         return String.format("%04d", code); // ゼロ埋めして4桁に
     }
 
-    private UserInfo editSignupInfo(String oneTimeCode, SignupInfo dto) {
+    public UserInfo editSignupInfo(String oneTimeCode, SignupInfo dto) {
         UserInfo userInfo = new UserInfo();
         userInfo.setLoginId(dto.getLoginId());
         userInfo.setMailAddress(dto.getMailAddress());
