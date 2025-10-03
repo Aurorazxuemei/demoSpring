@@ -31,7 +31,7 @@ public class UserListServiceImpl implements UserListService {
      * @param userInfos 　ユーザー情報EntityのList
      * @return　ユーザー一覧情報DTOのList
      */
-    private List<UserListInfo> toUserListInfos(List<UserInfo> userInfos) {
+    public List<UserListInfo> toUserListInfos(List<UserInfo> userInfos) {
         List<UserListInfo> userListInfos = new ArrayList<UserListInfo>();
         for (UserInfo userInfo : userInfos) {
             var userListInfo = mapper.map(userInfo, UserListInfo.class);
